@@ -142,3 +142,23 @@ export const getDashboard = async (req = request, res = response) => {
         })
     }
 }
+
+// untuk mengambil semua akun, mengambil semua data yang ada di tabel user
+export const allAccount = async (req = request, res = response) => {
+    // hampir sama seperti if dan else, dan try catch tidak perlu kondisi, {} = kondisi
+    try {
+        // untuk mengambil semua data
+        const result = await prisma.user.findMany();
+
+        return res.status(200).json({
+            message: "get data success", result
+        })
+
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "server internal error",
+            error: error.message
+        })
+    }
+} 
